@@ -2,6 +2,7 @@ from telegram import Bot
 import os
 from dotenv import load_dotenv
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 import time
@@ -15,6 +16,9 @@ load_dotenv()
 your_bot_token = os.getenv("BOT_TOKEN")
 
 # Create a new Chrome browser instance
+chrome_options = Options()
+chrome_options.add_argument("--headless") 
+driver = webdriver.Chrome(options=chrome_options)
 driver = webdriver.Chrome()
 
 # Function to extract table data
