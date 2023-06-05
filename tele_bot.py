@@ -11,6 +11,8 @@ import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 import asyncio
+from io import BytesIO
+
 
 load_dotenv()
 your_bot_token = os.getenv("BOT_TOKEN")
@@ -19,7 +21,6 @@ your_bot_token = os.getenv("BOT_TOKEN")
 chrome_options = Options()
 chrome_options.add_argument("--headless") 
 driver = webdriver.Chrome(options=chrome_options)
-driver = webdriver.Chrome()
 
 # Function to extract table data
 def extract_table_data(xpath):
@@ -98,8 +99,6 @@ print(four_day_outlook_data)
 print(monthly_outlook_data)
 
 # Store the data
-directory = '/home/piersonphua/'
-
 Singapore_Outlook = '<b><u>Singapore Outlook</u></b>\n' + Singapore_Outlook
 Remarks = '<b><u>Remarks</u></b>\n' + Remarks
 fortnightly_outlook_data = '<b><u>Fortnightly Outlook Data</u></b>\n' + '\n'.join('- ' + line for line in fortnightly_outlook_data)
@@ -114,8 +113,11 @@ data_frames["monthly_outlook_data"] = pd.DataFrame(monthly_outlook_data)
 # Filter the first dataframe
 data_frames["daily_outlook_data"] = data_frames["daily_outlook_data"][data_frames["daily_outlook_data"].iloc[:, 0] != 'Area of interest']
 
+# Create a BytesIO object
+output = BytesIO()
+
 # Create a Pandas Excel writer using openpyxl as the engine
-writer = pd.ExcelWriter(f'{directory}/table.xlsx', engine='openpyxl')
+writer = pd.ExcelWriter(output, engine='openpyxl')
 
 # Write each DataFrame to an Excel sheet
 for name, df in data_frames.items():
@@ -124,17 +126,19 @@ for name, df in data_frames.items():
 # Save the Excel file
 writer.save()
 
-# load the excel with its old state
-book = load_workbook(f'{directory}/table.xlsx')
+output.seek(0)
+book = load_workbook(output)
 
 for sheet in book:
     for column_cells in sheet.columns:
         sheet.column_dimensions[column_cells[0].column_letter].width = 25
         for cell in column_cells:
             cell.alignment = Alignment(wrapText=True)
+output = BytesIO()
+book.save(output)
 
-# save the excel
-book.save(f'{directory}/table.xlsx')
+# Go to the start of the BytesIO object
+output.seek(0)
 
 async def main():
     chat_id = os.getenv("CHAT_ID")
@@ -142,12 +146,11 @@ async def main():
     text1 = Singapore_Outlook
     text2 = Remarks
     text3 = fortnightly_outlook_data
-    table = f'{directory}/table.xlsx'
+    table = output
     await bot.send_message(chat_id=chat_id, text=text1, parse_mode = 'HTML')
     await bot.send_message(chat_id=chat_id, text=text2, parse_mode = 'HTML')
     await bot.send_message(chat_id=chat_id, text=text3, parse_mode = 'HTML')
-    await bot.send_document(chat_id=chat_id, document = table)
-
+    await bot.send_document(chat_id=chat_id, document = table, filename='table.xlsx')
 
 # Run the main function
 asyncio.run(main())
