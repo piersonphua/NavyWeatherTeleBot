@@ -32,8 +32,8 @@ def extract_table_data(xpath):
 # Navigate to the website
 driver.get('https://www.weather.gov.sg/wip-login.php')
 
-# Sleep for 2 seconds
-time.sleep(2)
+# Sleep for 5 seconds
+time.sleep(5)
 
 # Locate fields and button
 username_field = driver.find_element(By.ID, "user_login")
@@ -51,8 +51,8 @@ for character in os.getenv("PW"):
 
 login_button.click()
 
-# Sleep for 2 seconds
-time.sleep(2)
+# Sleep for 8 seconds
+time.sleep(8)
 
 # XPaths dictionary
 xpaths = {
@@ -72,8 +72,8 @@ except NoSuchElementException:
     haze_outlook_link = driver.find_element(By.XPATH, '/html/body/div/div/ul/li[5]/a')
 haze_outlook_link.click()
 
-# Sleep for 2 seconds
-time.sleep(2)
+# Sleep for 8 seconds
+time.sleep(8)
 
 # Extract haze outlook table data
 four_day_outlook_data = extract_table_data(xpaths['four_day_outlook'])
