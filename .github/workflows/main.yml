@@ -1,4 +1,4 @@
-name: Run Python script
+name: Run tele_bot.py
 
 on:
   schedule:
@@ -26,10 +26,10 @@ jobs:
     - name: Set up ChromeDriver
       uses: nanasess/setup-chromedriver@master
 
-    - name: Run script
+    - name: Run tele_bot.py
       env:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         USER: ${{ secrets.USER }}
         PW: ${{ secrets.PW }}
         CHAT_ID: ${{ secrets.CHAT_ID }}
-      run: python your_script.py
+      run: python tele_bot.py
