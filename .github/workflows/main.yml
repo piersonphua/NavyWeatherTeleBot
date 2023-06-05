@@ -2,7 +2,7 @@ name: Run tele_bot.py
 
 on:
   schedule:
-    - cron:  '00 15 * * *'
+    - cron:  '00 15 * * *' 
 
 jobs:
   build:
