@@ -124,7 +124,7 @@ for name, df in data_frames.items():
     df.to_excel(writer, sheet_name=name, index=False)
 
 # Save the Excel file
-writer.save()
+writer.close()
 
 output.seek(0)
 book = load_workbook(output)
