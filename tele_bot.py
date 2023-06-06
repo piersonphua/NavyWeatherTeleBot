@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from datetime import datetime
 import time
 import random
 import pandas as pd
@@ -12,7 +13,6 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 import asyncio
 from io import BytesIO
-
 
 load_dotenv()
 your_bot_token = os.getenv("BOT_TOKEN")
@@ -90,14 +90,6 @@ fortnightly_outlook_data = [item.text for item in fortnightly_weather_outlook_it
 # Close the browser
 driver.quit()
 
-# Print the data
-print(Singapore_Outlook)
-print(Remarks)
-print(fortnightly_outlook_data)
-print(daily_outlook_data)
-print(four_day_outlook_data)
-print(monthly_outlook_data)
-
 # Store the data
 Singapore_Outlook = '<b><u>Singapore Outlook</u></b>\n' + Singapore_Outlook
 Remarks = '<b><u>Remarks</u></b>\n' + Remarks
@@ -140,6 +132,8 @@ book.save(output)
 # Go to the start of the BytesIO object
 output.seek(0)
 
+today = datetime.now().strftime("&d0730H %B %Y") # e.g., 270730H May 2023
+
 async def main():
     chat_id = os.getenv("CHAT_ID")
     bot = Bot(token=your_bot_token)
@@ -150,7 +144,7 @@ async def main():
     await bot.send_message(chat_id=chat_id, text=text1, parse_mode = 'HTML')
     await bot.send_message(chat_id=chat_id, text=text2, parse_mode = 'HTML')
     await bot.send_message(chat_id=chat_id, text=text3, parse_mode = 'HTML')
-    await bot.send_document(chat_id=chat_id, document = table, filename='table.xlsx')
+    await bot.send_document(chat_id=chat_id, document = table, filename= f'Data CAA {today}')
 
 # Run the main function
 asyncio.run(main())
