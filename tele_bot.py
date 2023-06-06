@@ -132,7 +132,7 @@ book.save(output)
 # Go to the start of the BytesIO object
 output.seek(0)
 
-today = datetime.now().strftime("&d0730H %B %Y") # e.g., 270730H May 2023
+today = datetime.now().strftime("%d0630H %B %Y") # e.g., 270630H May 2023
 
 async def main():
     chat_id = os.getenv("CHAT_ID")
@@ -144,7 +144,7 @@ async def main():
     await bot.send_message(chat_id=chat_id, text=text1, parse_mode = 'HTML')
     await bot.send_message(chat_id=chat_id, text=text2, parse_mode = 'HTML')
     await bot.send_message(chat_id=chat_id, text=text3, parse_mode = 'HTML')
-    await bot.send_document(chat_id=chat_id, document = table, filename= f'Data CAA {today}')
+    await bot.send_document(chat_id=chat_id, document = table, filename= f'Data CAA {today}.xlsx')
 
 # Run the main function
 asyncio.run(main())
