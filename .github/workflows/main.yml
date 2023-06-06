@@ -2,7 +2,7 @@ name: Run tele_bot.py
 
 on:
   schedule:
-    - cron: '00 23 * * *'  # Runs every day at 23:00 UTC (07:00 SGT)
+    - cron: '30 22 * * *'  # Runs every day at 22:30 UTC (06:30 SGT)
 jobs:
   build:
 
