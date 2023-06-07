@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 import random
 import pandas as pd
@@ -132,7 +132,9 @@ book.save(output)
 # Go to the start of the BytesIO object
 output.seek(0)
 
-today = datetime.now().strftime("%d0630H %B %Y") # e.g., 270630H May 2023
+today = datetime.now()+timedelta(days=1)
+
+today = today.strftime("%d0630H %B %Y") # e.g., 270630H May 2023
 
 async def main():
     chat_id = os.getenv("CHAT_ID")
