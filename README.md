@@ -1,6 +1,6 @@
 # NavyWeatherTeleBot
 
-This project is a Python-based Telegram Bot that uses web scraping techniques to gather weather information and promulgates it to a channel chat on Telegram. This project was conceived in response to a noticeable gap in the availability and accessibility of specially curated maritime weather data. It not only served to fill that gap but also provided me with valuable experience in python programming, data handling and working with APIs.
+This project is a Python-based Telegram Bot that uses web scraping techniques to gather weather information and promulgates it to a channel chat on Telegram. This project was conceived in response to a noticeable gap in the availability and accessibility of specially curated maritime weather data. It not only served to fill that gap but also provided me with valuable experience in python programming, data handling and working with APIs. Join the channel here! https://t.me/SGWeatherforecast
 
 <p float="left">
 <img src="https://github.com/piersonphua/NavyWeatherTeleBot/blob/9f144edcca7a0efa2a0a11831b70d58b2772bd4a/images/IMG_4108.jpg" width=20% height=20%>
