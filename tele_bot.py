@@ -51,8 +51,8 @@ for character in os.getenv("PW"):
 
 login_button.click()
 
-# Sleep for 8 seconds
-time.sleep(8)
+# Sleep for 15 seconds
+time.sleep(15)
 
 # XPaths dictionary
 xpaths = {
@@ -72,8 +72,8 @@ except NoSuchElementException:
     haze_outlook_link = driver.find_element(By.XPATH, '/html/body/div/div/ul/li[5]/a')
 haze_outlook_link.click()
 
-# Sleep for 8 seconds
-time.sleep(8)
+# Sleep for 15 seconds
+time.sleep(15)
 
 # Extract haze outlook table data
 four_day_outlook_data = extract_table_data(xpaths['four_day_outlook'])
