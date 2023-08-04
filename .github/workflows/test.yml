@@ -22,7 +22,7 @@ jobs:
         pip install python-telegram-bot python-dotenv selenium pandas openpyxl aiohttp asyncio webdriver_manager DateTime
 
     - name: Set up ChromeDriver
-      uses: nanasess/setup-chromedriver@master
+      uses: nanasess/setup-chromedriver@v2
       with:
         chromedriver-version: 'latest'
 
