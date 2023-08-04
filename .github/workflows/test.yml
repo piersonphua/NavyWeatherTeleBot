@@ -1,0 +1,33 @@
+name: Single test run tele_bot.py
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install python-telegram-bot python-dotenv selenium pandas openpyxl aiohttp asyncio webdriver_manager DateTime
+
+    - name: Set up ChromeDriver
+      uses: nanasess/setup-chromedriver@master
+
+    - name: Run tele_bot.py
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        USER: ${{ secrets.USER }}
+        PW: ${{ secrets.PW }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
+      run: python tele_bot.py
