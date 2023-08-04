@@ -22,9 +22,9 @@ jobs:
         pip install python-telegram-bot python-dotenv selenium pandas openpyxl aiohttp asyncio webdriver_manager DateTime
 
     - name: Set up ChromeDriver
-      uses: nanasess/setup-chromedriver@v2
-      with:
-        chromedriver-version: 'latest'
+      uses: actions/checkout@master
+      run: sudo apt-fast install -y google-chrome
+      uses: nanasess/setup-chromedriver@master
 
     - name: Run tele_bot.py
       env:
