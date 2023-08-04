@@ -23,6 +23,8 @@ jobs:
 
     - name: Set up ChromeDriver
       uses: nanasess/setup-chromedriver@master
+      with:
+        chromedriver-version: 'latest'
 
     - name: Run tele_bot.py
       env:
