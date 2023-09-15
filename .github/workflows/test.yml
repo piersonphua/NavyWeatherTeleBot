@@ -31,9 +31,9 @@ jobs:
 
         wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.62/linux64/chrome-linux64.zip
         unzip chrome-linux64.zip
-        sudo mv chrome-linux64/chrome /usr/bin/chrome
-        sudo chown root:root /usr/bin/chrome
-        sudo chmod +x /usr/bin/chrome
+        sudo mv chrome-linux64/chrome /usr/bin/chrome/google-chrome
+        sudo chown root:root /usr/bin/chrome/google-chrome
+        sudo chmod +x /usr/bin/chrome/google-chrome
         
         wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.62/linux64/chromedriver-linux64.zip
         unzip chromedriver-linux64.zip
