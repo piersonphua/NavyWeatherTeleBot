@@ -29,7 +29,7 @@ jobs:
         echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
         sudo apt-get -y update
 
-        wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.62/linux64/google-chrome-stable_117.0.5938.62-1_amd64.deb
+        wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_117.0.5938.62-1_amd64.deb
         sudo dpkg -i google-chrome-stable_117.0.5938.62-1_amd64.deb
         sudo apt-get install -f
         
