@@ -32,7 +32,7 @@ def extract_table_data(xpath):
 # Navigate to the website
 driver.get('https://www.weather.gov.sg/wip-login.php')
 
-# Sleep for 5 seconds
+##Sleep for 5 seconds
 time.sleep(5)
 
 # Locate fields and button
