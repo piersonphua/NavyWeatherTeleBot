@@ -22,7 +22,7 @@ chrome_options = Options()
 chrome_options.add_argument("--headless") 
 driver = webdriver.Chrome(options=chrome_options)
 
-# Function to extract table data
+## Function to extract table data
 def extract_table_data(xpath):
     table = driver.find_element(By.XPATH, xpath)
     rows = table.find_elements(By.TAG_NAME, 'tr')
