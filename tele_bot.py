@@ -17,7 +17,7 @@ from io import BytesIO
 load_dotenv()
 your_bot_token = os.getenv("BOT_TOKEN")
 
-# Create a new Chrome browser instance
+## Create a new Chrome browser instance
 chrome_options = Options()
 chrome_options.add_argument("--headless") 
 driver = webdriver.Chrome(options=chrome_options)
