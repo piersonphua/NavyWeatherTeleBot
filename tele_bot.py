@@ -52,7 +52,7 @@ for character in os.getenv("PW"):
 login_button.click()
 
 # Sleep for 15 seconds
-time.sleep(15)
+time.sleep(45)
 
 # XPaths dictionary
 xpaths = {
