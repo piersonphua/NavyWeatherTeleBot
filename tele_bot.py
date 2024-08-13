@@ -82,6 +82,7 @@ def try_extract_daily_outlook_data(xpaths, retries=3):
                 WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="tableData"]')))
             else:
                 raise e
+daily_outlook_data = try_extract_daily_outlook_data(xpaths)
 #
 
 # Locate haze outlook link and click
