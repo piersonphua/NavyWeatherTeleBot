@@ -14,6 +14,12 @@ from openpyxl.styles import Alignment
 import asyncio
 from io import BytesIO
 
+#
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+#
+
+
 load_dotenv()
 your_bot_token = os.getenv("BOT_TOKEN")
 
@@ -63,7 +69,20 @@ xpaths = {
 }
 
 # Extract local waters table data
-daily_outlook_data = extract_table_data(xpaths['local_LEFT_col']) + extract_table_data(xpaths['local_RIGHT_col'])
+#
+def try_extract_daily_outlook_data(xpaths, retries=3):
+    for i in range(retries):
+        try:
+            daily_outlook_data = extract_table_data(xpaths['local_LEFT_col']) + extract_table_data(xpaths['local_RIGHT_col'])
+            return daily_outlook_data
+        except NoSuchElementException as e:
+            print(f"Attempt {i + 1} failed: {e}. Refreshing the page...")
+            if i < retries - 1:
+                driver.refresh()
+                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="tableData"]')))
+            else:
+                raise e
+#
 
 # Locate haze outlook link and click
 try:
