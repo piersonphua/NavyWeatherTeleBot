@@ -14,12 +14,6 @@ from openpyxl.styles import Alignment
 import asyncio
 from io import BytesIO
 
-#
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-#
-
-
 load_dotenv()
 your_bot_token = os.getenv("BOT_TOKEN")
 
@@ -39,7 +33,7 @@ def extract_table_data(xpath):
 driver.get('https://www.weather.gov.sg/wip-login.php')
 
 ###Sleep for 5 seconds
-time.sleep(15)
+time.sleep(20)
 
 # Locate fields and button
 username_field = driver.find_element(By.ID, "user_login")
@@ -58,7 +52,7 @@ for character in os.getenv("PW"):
 login_button.click()
 
 # Sleep for 15 seconds
-time.sleep(60)
+time.sleep(30)
 
 # XPaths dictionary
 xpaths = {
@@ -69,21 +63,7 @@ xpaths = {
 }
 
 # Extract local waters table data
-#
-def try_extract_daily_outlook_data(xpaths, retries=3):
-    for i in range(retries):
-        try:
-            daily_outlook_data = extract_table_data(xpaths['local_LEFT_col']) + extract_table_data(xpaths['local_RIGHT_col'])
-            return daily_outlook_data
-        except NoSuchElementException as e:
-            print(f"Attempt {i + 1} failed: {e}. Refreshing the page...")
-            if i < retries - 1:
-                driver.refresh()
-                WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//*[@id="tableData"]')))
-            else:
-                raise e
-daily_outlook_data = try_extract_daily_outlook_data(xpaths)
-#
+daily_outlook_data = extract_table_data(xpaths['local_LEFT_col']) + extract_table_data(xpaths['local_RIGHT_col'])
 
 # Locate haze outlook link and click
 try:
@@ -93,7 +73,7 @@ except NoSuchElementException:
 haze_outlook_link.click()
 
 # Sleep for 15 seconds
-time.sleep(60)
+time.sleep(30)
 
 # Extract haze outlook table data
 four_day_outlook_data = extract_table_data(xpaths['four_day_outlook'])
