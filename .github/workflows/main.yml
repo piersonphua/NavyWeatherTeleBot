@@ -46,4 +46,16 @@ jobs:
         USER: ${{ secrets.USER }}
         PW: ${{ secrets.PW }}
         CHAT_ID: ${{ secrets.CHAT_ID }}
-      run: python tele_bot.py
+      run: |
+        max_retries=3
+        counter=0
+        until [ $counter -ge $max_retries ]
+        do
+          python tele_bot.py && break || counter=$((counter+1))
+          echo "Attempt $counter failed. Retrying in 10 seconds..."
+          sleep 10
+        done
+        if [ $counter -eq $max_retries ]; then
+          echo "All attempts failed. Exiting."
+          exit 1
+        fi
