@@ -36,6 +36,8 @@ jobs:
          wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.62/linux64/chromedriver-linux64.zip
          unzip chromedriver-linux64.zip
          sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
+         sudo chown root:root /usr/bin/chromedriver
+         sudo chmod +x /usr/bin/chromedriver
 
     - name: Run tele_bot.py
       env:
